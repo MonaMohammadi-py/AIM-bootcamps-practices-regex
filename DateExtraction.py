@@ -1,30 +1,21 @@
 #https://github.com/MonaMohammadi-py/AIM-bootcamps-practices-regex.git
 import re
 
-def date_changer(raw_date):
-    update_date1 = re.findall(r"\d{4}-\d{2}-\d{2})" , raw_date)
-    update_date2 = re.findall(r"\d{2}/\d{2}/\d{4}" , raw_date)
+def solve():
+    text = input()    
+    pattern = r"(\d{4}-\d{2}-\d{2})|(\d{2}/\d{2}/\d{4})"
+    
+    matches = re.finditer(pattern, text)
+    
+    for match in matches:         
+        if match.group(1):
+            print(match.group(1))
 
-    if update_date1:
-        year = update_date1[0]
-        month = update_date1[1]
-        day = update_date1[2]
-        return f"{year}-{month}-{day}"
-
-    if update_date2:
-        year = update_date1[2]
-        month = update_date1[1]
-        day = update_date1[0]
-        return f"{year}-{month}-{day}"
-
-
-def main():
-    rew_date = input()
-    print(date_changer)
-
-
-
+        date_str = match.group(2)
+                
+        if match.group(2):
+            parts = date_str.split('/')
+            print(f"{parts[2]}-{parts[1]}-{parts[0]}")
 
 if __name__ == "__main__":
-    main()
-
+    solve()
