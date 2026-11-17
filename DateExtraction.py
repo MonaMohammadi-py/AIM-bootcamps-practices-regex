@@ -1,8 +1,7 @@
 #https://github.com/MonaMohammadi-py/AIM-bootcamps-practices-regex.git
 import re
 
-def solve():
-    text = input()    
+def solve(text: str):   
     pattern = r"(\d{4}-\d{2}-\d{2})|(\d{2}/\d{2}/\d{4})"
     
     matches = re.finditer(pattern, text)
@@ -17,5 +16,11 @@ def solve():
             parts = date_str.split('/')
             print(f"{parts[2]}-{parts[1]}-{parts[0]}")
 
+
+def main():
+    text = input()
+    solve(text)
+
+
 if __name__ == "__main__":
-    solve()
+    main()
