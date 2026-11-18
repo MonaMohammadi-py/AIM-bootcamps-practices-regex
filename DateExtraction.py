@@ -1,48 +1,36 @@
 #https://github.com/MonaMohammadi-py/AIM-bootcamps-practices-regex.git
 import re
+import sys
 
-def pattern_finder(text: str) -> list:
-    pattern = r"(?<!\d)(\d{4}-\d{2}-\d{2}|\d{2}/\d{2}/\d{4})(?!\d)"
+text = input()
+
+pattern = r"(\d{4}-\d{2}-\d{2}|\d{2}/\d{2}/\d{4})"
+
+matches = list(re.finditer(pattern, text))
+
+if not matches:
+    print("None")
+    sys.exit()
+
+extracted_dates = []
+
+for match in matches:
+    date_str = match.group()
     
-    matches = list(re.finditer(pattern, text))
-    
-    if not matches:
-        print("None")
-        return
-
-    return matches
-
-
-def new_date(matches: list):
-    extracted_dates = []
-    for match in matches:
-        date_str = match.group()
-        if "-" in match:
-            y, m, d = map(int, date_str.split("-"))
-        else:
-            d, m, y = map(int, date_str.split("/"))
-        if (1 <= y <= 9999) and (1 <= m <= 12) and (1 <= d <= 31):
-            formatted_date = f"{y:04d}-{m:02d}-{d:02d}"
-            extracted_dates.append(formatted_date)
-        else:
-            return extracted_dates
-
-    return extracted_dates
-
-
-
-def main():    
-    text = input()
-    matches = pattern_finder(text)
-    dates = new_date(matches)
-
-    if not dates:
-        print("None")
+    if "-" in date_str:
+        y, m, d = map(int, date_str.split("-"))
     else:
-        for date in dates:
-            print(date)
+        d, m, y = map(int, date_str.split("/"))
+        
+    if 1 <= y <= 9999 and 1 <= m <= 12 and 1 <= d <= 31:
+        formatted_date = f"{y:04d}-{m:02d}-{d:02d}"
+        extracted_dates.append(formatted_date)
+    else:
+        print("None")
+        sys.exit()
 
-
-
-if __name__ == "__main__":
-    main()
+if not extracted_dates:
+    print("None")
+else:
+    for date in extracted_dates:
+        print(date)
