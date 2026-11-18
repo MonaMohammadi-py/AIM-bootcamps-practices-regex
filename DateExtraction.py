@@ -1,10 +1,9 @@
 #https://github.com/MonaMohammadi-py/AIM-bootcamps-practices-regex.git
 import re
-import sys
 
 text = input()
 
-matches = list(re.finditer(r"(?<!\d)(\d{4}-\d{2}-\d{2}|\d{2}/\d{2}/\d{4})(?<!\d)", text))
+matches = list(re.finditer(r"(?<!\d)(\d{4}-\d{2}-\d{2}|\d{2}/\d{2}/\d{4})(?!\d)", text))
 
 extracted_dates = []
 
