@@ -4,11 +4,7 @@ import sys
 
 text = input()
 
-matches = list(re.finditer(r"(\d{4}-\d{2}-\d{2}|\d{2}/\d{2}/\d{4})", text))
-
-if not matches:
-    print("None")
-    sys.exit(1)
+matches = list(re.finditer(r"(?<!\d)(\d{4}-\d{2}-\d{2}|\d{2}/\d{2}/\d{4})(?<!\d)", text))
 
 extracted_dates = []
 
